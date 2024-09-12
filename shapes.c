@@ -74,8 +74,6 @@ void createPyramidReverse(int number)
 
 int main()
 {
+    createPyramidReverse(7);
     createPyramid(7);
-    printf("\n");
-    createPyramidReverse(5);
-    return 0;
 }
