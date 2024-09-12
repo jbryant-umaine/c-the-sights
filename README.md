@@ -14,9 +14,9 @@ This program allows you to generate ASCII art of a pyramid structure.
 
 ### Installation
 
-Install `gcc`.
+Install `gcc` from the `build-essential` package.
 
-Build binary with `gcc ./shapes.c -o shapes` command.
+Build binary with `gcc ./shapes.c -o shapes`.
 
 ### Running
 
