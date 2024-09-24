@@ -8,7 +8,7 @@ Class: COS 135
 
 ## Description
 
-This program allows you to generate ASCII art of a pyramid structure.
+This is a repository hosting all of my code submissions for COS 135.
 
 ## Getting Started
 
@@ -16,8 +16,8 @@ This program allows you to generate ASCII art of a pyramid structure.
 
 Install `gcc` from the `build-essential` package.
 
-Build binary with `gcc ./shapes.c -o shapes`.
+Build binary with `gcc ./[program name].c -o shapes`.
 
 ### Running
 
-The binary can be ran with `./shapes`
+The binary can be ran with `./[binary name]`
