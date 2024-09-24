@@ -8,7 +8,7 @@ Class: COS 135
 
 ## Description
 
-This is a repository hosting all of my code submissions for COS 135.
+This is a repository for hosting all of my code submissions for COS 135.
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ This is a repository hosting all of my code submissions for COS 135.
 
 Install `gcc` from the `build-essential` package.
 
-Build binary with `gcc ./[program name].c -o shapes`.
+Build binary with `gcc ./[program name].c -o [binary name]`.
 
 ### Running
 
