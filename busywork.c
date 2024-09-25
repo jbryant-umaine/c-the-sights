@@ -15,6 +15,14 @@ void squareCreate(char charString[], int shapeSize, size_t stringSize)
 
     int charPosition = 0;
 
+    // If no string was provided, use default * character.
+    // Prevents vulnerability.
+    if (stringSize == 0)
+    {
+        charString = "*";
+        stringSize = 1;
+    }
+
     // Create the column for this square
     for (int j = 0; j < shapeSize; j++)
     {
@@ -44,6 +52,14 @@ void emptyDiamond(char charString[], int shapeSize, size_t stringSize)
 {
 
     int charPosition = 0;
+
+    // If no string was provided, use default * character.
+    // Prevents vulnerability.
+    if (stringSize == 0)
+    {
+        charString = "*";
+        stringSize = 1;
+    }
 
     // Create the top half of the diamond
     for (int j = 0; j < shapeSize; j++)
@@ -91,7 +107,7 @@ void emptyDiamond(char charString[], int shapeSize, size_t stringSize)
 
 int main(int argc, char *argv[])
 {
-    if (argc < 3)
+    if (argc < 4)
     {
         printf("Must supply at least 3 arguments\n");
         return 0;
