@@ -1,4 +1,4 @@
-## HW 1
+## c-the-sights
 
 ```
 Author: Jacob Bryant
