@@ -21,12 +21,6 @@ void squareCreate(char charString[], int shapeSize, size_t stringSize)
         // Create the row for this square
         for (int k = 0; k < shapeSize; k++)
         {
-            // Reset charPosition to 0 so it never tries to index over the length of it.
-            if (charPosition >= stringSize)
-            {
-                charPosition = 0;
-            }
-
             // Calculate if the square should use spacing on this line.
             int doSpacing = ((j > 0 && j < shapeSize - 1) && (k > 0 && k < shapeSize - 1));
 
@@ -36,7 +30,7 @@ void squareCreate(char charString[], int shapeSize, size_t stringSize)
             }
             else
             {
-                printf("%c", charString[charPosition]);
+                printf("%c", charString[charPosition % stringSize]);
                 charPosition++;
             }
         }
@@ -59,19 +53,13 @@ void emptyDiamond(char charString[], int shapeSize, size_t stringSize)
 
             int doSpacing = ((shapeSize * 2) - j * 2) / 2;
 
-            // Reset charPosition to 0 so it never tries to index over the length of it.
-            if (charPosition >= stringSize)
-            {
-                charPosition = 0;
-            }
-
             if (k > doSpacing - 1 && k < doSpacing + (j * 2))
             {
                 printf(" ");
             }
             else
             {
-                printf("%c", charString[charPosition]);
+                printf("%c", charString[charPosition % stringSize]);
                 charPosition++;
             }
         }
@@ -86,19 +74,13 @@ void emptyDiamond(char charString[], int shapeSize, size_t stringSize)
         {
             int doSpacing = ((shapeSize * 2) - j * 2) / 2;
 
-            // Reset charPosition to 0 so it never tries to index over the length of it.
-            if (charPosition >= stringSize)
-            {
-                charPosition = 0;
-            }
-
             if (k > doSpacing - 1 && k < doSpacing + (j * 2))
             {
                 printf(" ");
             }
             else
             {
-                printf("%c", charString[charPosition]);
+                printf("%c", charString[charPosition % stringSize]);
                 charPosition++;
             }
         }
