@@ -48,6 +48,11 @@ int main(int argc, char *argv[])
 
     // Open file
     FILE *fp = fopen(argv[1], "r");
+    if (fp == NULL)
+    {
+        printf("File could not be opened.");
+        return 0;
+    }
 
     char line[500];
 
