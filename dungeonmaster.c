@@ -17,36 +17,16 @@ struct Room
     char description[500];
 };
 
-// Factory for dynamically creating a room struct.
-struct Room *createRoom(
-    char *name,
-    char *code,
-    char *description)
-{
-    struct Room *x = malloc(sizeof(struct Room));
-    // Copy strings into the struct fields and null-terminate them.
-    snprintf(x->name, sizeof(x->name), "%s", name);
-    snprintf(x->code, sizeof(x->code), "%s", code);
-    snprintf(x->description, sizeof(x->description), "%s", description);
-    return x;
-}
-
-// LinkedList implementation
-typedef struct NODE
-{
-    struct Room *data;
-    struct NODE *next;
-} NODE;
-
 int main(int argc, char *argv[])
 {
+    // Check if file name was passed as argument.
     if (argc < 2)
     {
         printf("Not enough arguments.");
         return 0;
     }
 
-    // Open file
+    // Attempt to open file
     FILE *fp = fopen(argv[1], "r");
     if (fp == NULL)
     {
@@ -54,15 +34,15 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    char line[500];
-
+    // Keep track of how many rooms along with which property.
     int roomCount = 0;
     int roomProperty = 0;
 
-    char name[50], code[3], description[500];
+    // Allocate memory for one room.
+    int roomCapacity = 1;
+    struct Room *rooms = malloc(roomCapacity * sizeof(struct Room));
 
-    NODE *head = NULL;
-    NODE *p = NULL;
+    char line[500];
 
     // Read file line by line
     while (fgets(line, sizeof(line), fp) != NULL)
@@ -77,8 +57,8 @@ int main(int argc, char *argv[])
         // Room name
         if (roomProperty == 0)
         {
-            // Copy room name into temp name buffer.
-            sscanf(line + 11, "%[^\n]", name);
+            // Copy room name
+            sscanf(line + 11, "%[^\n]", rooms[roomCount].name);
             roomProperty++;
             continue;
         }
@@ -86,8 +66,9 @@ int main(int argc, char *argv[])
         // Room code
         if (roomProperty == 1)
         {
-            // Copy room code into temp code buffer.
-            sscanf(line + 11, "%s", code);
+            char code[3];
+            // Copy room code
+            sscanf(line + 11, "%s", rooms[roomCount].code);
             roomProperty++;
             continue;
         }
@@ -95,52 +76,25 @@ int main(int argc, char *argv[])
         // Room desc
         if (roomProperty == 2)
         {
-            // Copy room desc into temp desc buffer.
-            sscanf(line + 18, "%[^\n]", description);
+            char description[500];
 
-            // Create a new room
-            struct Room *newRoom = createRoom(name, code, description);
+            // Copy room desc
+            sscanf(line + 18, "%[^\n]", rooms[roomCount].description);
 
-            // Create a new node
-            NODE *newNode = malloc(sizeof(NODE));
-
-            // Set node data to new node and set next to NULL.
-            newNode->data = newRoom;
-            newNode->next = NULL;
-
-            // Set current head to this node.
-            if (head == NULL)
-            {
-                head = newNode;
-            }
-            else // Set latest node's next to this node.
-            {
-                p->next = newNode;
-            }
-
-            // Set node pointer to the latest node.
-            p = newNode;
+            // Double the room rapacity.
+            roomCapacity *= 2;
+            struct Room *temp = realloc(rooms, roomCapacity * sizeof(struct Room));
 
             roomCount++;
             roomProperty = 0;
 
-            // Reset string allocations.
-            memset(name, 0, sizeof(name));
-            memset(code, 0, sizeof(code));
-            memset(description, 0, sizeof(description));
+            rooms = temp;
         }
     }
 
-    NODE *current = head;
-
-    // Traverse linked list and print out room data.
-    while (current != NULL)
+    for (int i = 0; i < roomCount; i++)
     {
-        if (current->data != NULL)
-        {
-            printf("Room %s: %s\n", current->data->code, current->data->name);
-        }
-        current = current->next;
+        printf("Room %s: %s\n", rooms[i].code, rooms[i].name);
     }
 
     fclose(fp);
