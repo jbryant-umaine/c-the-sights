@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     // Open file
     FILE *fp = fopen(argv[1], "r");
 
-    char line[50000];
+    char line[500];
 
     int roomCount = 0;
     int roomProperty = 0;
@@ -62,11 +62,20 @@ int main(int argc, char *argv[])
     // Read file line by line
     while (fgets(line, sizeof(line), fp) != NULL)
     {
+        // Ignore empty lines
+        if (line[0] == '\n')
+        {
+            roomProperty = 0;
+            continue;
+        }
+
         // Room name
         if (roomProperty == 0)
         {
             // Copy room name into temp name buffer.
             sscanf(line + 11, "%[^\n]", name);
+            roomProperty++;
+            continue;
         }
 
         // Room code
@@ -74,6 +83,8 @@ int main(int argc, char *argv[])
         {
             // Copy room code into temp code buffer.
             sscanf(line + 11, "%s", code);
+            roomProperty++;
+            continue;
         }
 
         // Room desc
@@ -81,13 +92,7 @@ int main(int argc, char *argv[])
         {
             // Copy room desc into temp desc buffer.
             sscanf(line + 18, "%[^\n]", description);
-        }
 
-        roomProperty++;
-
-        // No more room properties to read.
-        if (roomProperty == 4)
-        {
             // Create a new room
             struct Room *newRoom = createRoom(name, code, description);
 
