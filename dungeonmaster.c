@@ -14,7 +14,7 @@ struct Room
 {
     char name[50];
     char code[3];
-    char description[1000];
+    char description[500];
 };
 
 // Factory for dynamically creating a room struct.
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     int roomCount = 0;
     int roomProperty = 0;
 
-    char name[50], code[3], description[1000];
+    char name[50], code[3], description[500];
 
     NODE *head = NULL;
     NODE *p = NULL;
