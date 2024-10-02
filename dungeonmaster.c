@@ -39,8 +39,7 @@ int main(int argc, char *argv[])
     int roomProperty = 0;
 
     // Allocate memory for one room.
-    int roomCapacity = 1;
-    struct Room *rooms = malloc(roomCapacity * sizeof(struct Room));
+    struct Room *rooms = malloc(sizeof(struct Room));
 
     char line[500];
 
@@ -81,11 +80,10 @@ int main(int argc, char *argv[])
             // Copy room desc
             sscanf(line + 18, "%[^\n]", rooms[roomCount].description);
 
-            // Double the room rapacity.
-            roomCapacity *= 2;
-            struct Room *temp = realloc(rooms, roomCapacity * sizeof(struct Room));
-
             roomCount++;
+
+            struct Room *temp = realloc(rooms, (roomCount + 1) * sizeof(struct Room));
+
             roomProperty = 0;
 
             rooms = temp;
