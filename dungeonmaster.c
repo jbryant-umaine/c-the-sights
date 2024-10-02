@@ -74,6 +74,7 @@ int main(int argc, char *argv[])
         // Room desc
         if (roomProperty == 2)
         {
+
             // Copy room desc
             sscanf(line + 18, "%[^\n]", rooms[roomCount].description);
 
