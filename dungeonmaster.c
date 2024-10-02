@@ -65,7 +65,6 @@ int main(int argc, char *argv[])
         // Room code
         if (roomProperty == 1)
         {
-            char code[3];
             // Copy room code
             sscanf(line + 11, "%s", rooms[roomCount].code);
             roomProperty++;
@@ -75,8 +74,6 @@ int main(int argc, char *argv[])
         // Room desc
         if (roomProperty == 2)
         {
-            char description[500];
-
             // Copy room desc
             sscanf(line + 18, "%[^\n]", rooms[roomCount].description);
 
